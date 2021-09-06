@@ -11,50 +11,68 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Flutter Commerce",
-            style: TextStyle(
-              color: Colors.black,
+          appBar: AppBar(
+            title: Text(
+              "Flutter Commerce",
+              style: TextStyle(
+                color: Colors.black,
+              ),
             ),
+            leading: Image(
+              image: AssetImage(
+                "images/logo.jpg",
+              ),
+            ),
+            backgroundColor: Colors.white,
           ),
-          leading: Image(
-            image: AssetImage(
-              "images/logo.jpg",
-            ),
+          body: Center(
+            child: Text("Hello"),
           ),
-          backgroundColor: Colors.white,
-        ),
-        body: Center(
-          child: Text("Hello"),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Colors.white,
-              ),
-              title: Text(
-                "Home",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.add_shopping_cart,
-              ),
-              title: Text(
-                "Cart",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
-          backgroundColor: Colors.teal,
+          bottomNavigationBar: CustomBottomNavigation()),
+    );
+  }
+}
+
+class CustomBottomNavigation extends StatefulWidget {
+  const CustomBottomNavigation({Key? key}) : super(key: key);
+
+  @override
+  _CustomBottomNavigationState createState() => _CustomBottomNavigationState();
+}
+
+class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
+  BottomNavigationBarItem getBottomBarItem(
+      IconData icon, String text, Color color) {
+    return BottomNavigationBarItem(
+      icon: Icon(
+        icon,
+        color: color,
+      ),
+      title: Text(
+        text,
+        style: TextStyle(
+          color: color,
         ),
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      items: [
+        getBottomBarItem(
+          Icons.home,
+          "Home",
+          Colors.white,
+        ),
+        getBottomBarItem(
+          Icons.add_shopping_cart,
+          "Cart",
+          Colors.black54,
+        ),
+      ],
+      backgroundColor: Colors.teal,
     );
   }
 }
